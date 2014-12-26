@@ -52,9 +52,9 @@ Additionally, processed PNG images corresponding to each neurosphere input image
 
 ## Acknowledgments
 
-- Brian Nelson <yonbeastie@gmail.com> for his development help :)
+- [Brian Nelson](mailto:yonbeastie@gmail.com) for his development help :)
 
 
 ## Contact
 
-If you have questions or comments, please contact Brianna Goldenstein <brianna.goldenstein@gmail.com>. Contributions welcome!
+If you have questions or comments, please contact [Brianna Goldenstein](mailto:brianna.goldenstein@gmail.com). Contributions welcome!
