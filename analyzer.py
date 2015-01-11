@@ -1,14 +1,14 @@
 #!/usr/bin/python
 
 # libraries
-import skimage
+#import matplotlib.pyplot as plt
 import numpy as np
-import matplotlib.pyplot as plt
-
+from os import walk
+import skimage
 from skimage import data, filter, color
-from skimage.transform import hough_circle
-from skimage.feature import peak_local_max
 from skimage.draw import circle_perimeter
+from skimage.feature import peak_local_max
+from skimage.transform import hough_circle
 from skimage.util import img_as_ubyte
 
 
@@ -19,9 +19,17 @@ class Analyzer:
 		self.min_d = min_d
 		self.px_per_micron = px_per_micron
         
-	def open_folder(self):
-		print 'Opening folder...'
-		return ['image1.jpg', 'image2.jpg', 'image3.jpg']
+	def read_folder(self):
+		"""
+		Read the input folder, read, list, and return the filenames inside folder
+		@return {Array} f: all filenames in input folder
+		"""
+		f = []
+		for (_, _, filenames) in walk(self.folder):
+			f.extend(filenames)
+			break
+		print 'Opening folder...' + str(f)
+		return f
     
 	def process_image(self, file):
 		print 'Processing file ' + file
@@ -31,11 +39,11 @@ class Analyzer:
 		print 'Rendering output for file ' + file
     
 	def run(self):
-		filenames = self.open_folder()
+		filenames = self.read_folder()
 		for file in filenames:
 			self.process_image(file)
     		
     		
 if __name__ == '__main__':
-	a = Analyzer('desktop', 30, 92)
+	a = Analyzer('/Users/briannaG/GitHub/py-neurospheres/test/sample-images', 30, 92)
 	a.run()
