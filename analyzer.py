@@ -1,11 +1,10 @@
-#!/usr/bin/python
+#!/usr/local/bin/python
 
 # libraries
-#import matplotlib.pyplot as plt
 import numpy as np
 from os import walk
 import skimage
-from skimage import data, filter, color
+from skimage import data, filter, color, io
 from skimage.draw import circle_perimeter
 from skimage.feature import peak_local_max
 from skimage.transform import hough_circle
@@ -28,15 +27,28 @@ class Analyzer:
 		for (_, _, filenames) in walk(self.folder):
 			f.extend(filenames)
 			break
-		print 'Opening folder...' + str(f)
+		print 'Opening', self.folder
 		return f
     
-	def process_image(self, file):
-		print 'Processing file ' + file
-		self.render_output(file)
+	def process_image(self, filename):
+		"""
+		Read image and write new image to 'processed' folder
+		@param {String} file: image path
+		"""
+		filepath = self.folder + '/' + filename
+		image = io.imread(filepath)
+		print 'Processing file', filename
+		self.render_output(filename, image)
     
-	def render_output(self, file):
-		print 'Rendering output for file ' + file
+	def render_output(self, filename, file):
+		"""
+		Writes the file to a path
+		@param {String} filename: the name of the file (path not included)
+		@param {ndarray} file: the data containing the image info (numpy data array)
+		"""
+		print 'Writing file', filename
+		filename = self.folder + '/../analyzed-images/' + filename
+		io.imsave(filename, file)
     
 	def run(self):
 		filenames = self.read_folder()
